@@ -9,4 +9,7 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+.idea
 
+.idea/
+gs-serving-web-content.iml
