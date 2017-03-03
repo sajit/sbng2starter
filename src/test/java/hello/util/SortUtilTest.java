@@ -1,5 +1,6 @@
 package hello.util;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.quicktheories.quicktheories.core.Source;
@@ -28,8 +29,8 @@ public class SortUtilTest {
 
     @Test
     public void testUnsortedList(){
-        String[] input = new String[]{"world","hello","is","best"};
-        String[] output = new String[]{"best","hello","is","world"};
+        String[] input = new String[]{"world","is","world"};
+        String[] output = new String[]{"is","world","world"};
         assertEquals(output,SortUtil.quickSort(input));
     }
 

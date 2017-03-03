@@ -8,7 +8,8 @@ public class SortUtil {
     private static String[] doQuickSort(String[] strs, int low,int high){
         if(low<high){
             int partitionIdx = partition(strs,low,high);
-            doQuickSort(strs,low,partitionIdx);
+            
+            doQuickSort(strs,low,partitionIdx-1);
             doQuickSort(strs,partitionIdx+1,high);
         }
         return strs;
@@ -16,13 +17,14 @@ public class SortUtil {
 
     private static int partition(String[] arr, int start, int end) {
 
+
         int i=start,j=end;
         String pivotval = arr[start];
         while(i<j){
             while(i<end && arr[i].compareTo(pivotval)<=0){
                 i++;
             }
-            while(j>=start && arr[j].compareTo(pivotval)>0){
+            while(j>start && arr[j].compareTo(pivotval)>0){
                 j--;
             }
             if(i<j){
@@ -30,7 +32,15 @@ public class SortUtil {
             }
         }
         swap(arr,start,j);
+        //printArr(arr);
         return j;
+    }
+
+    private static void printArr(String[] arr) {
+        for(int i=0;i<arr.length;i++){
+            System.out.print(arr[i]+",");
+        }
+        System.out.println();
     }
 
 
