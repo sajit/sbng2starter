@@ -18,7 +18,7 @@ public class GreetingController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
     static Map<String,Integer> awardTypeIdx = new HashMap<>();
-    static enum AwardType {GOLD,SILVER,BRONZE};
+    public static enum AwardType {GOLD,SILVER,BRONZE};
     static {
         awardTypeIdx.put(AwardType.GOLD.name(),0);
         awardTypeIdx.put(AwardType.SILVER.name(),1);
@@ -43,13 +43,15 @@ public class GreetingController {
     @RequestMapping("/limits")
     public Double limit(@RequestParam(value = "gradeLevel") String gradeLevel,@RequestParam("awardType") String awardType,HttpServletResponse response){
 
+
+
+        int gradIdx = Integer.valueOf(gradeLevel).intValue();
         Optional<AwardType> awardTypeName = Arrays.asList(AwardType.values()).stream().filter(type -> type.name().equalsIgnoreCase(awardType)).findAny();
         if(!awardTypeName.isPresent()){
             response.setStatus(400);
             return null;
         }
         int awardIdx = awardTypeIdx.get(awardTypeName.get().name());
-        int gradIdx = Integer.valueOf(gradeLevel).intValue();
         Double result = limits[gradIdx][awardIdx];
         if(result == null){
             response.setStatus(404);
